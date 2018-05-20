@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/about"
+        app:showAsAction="never"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="About">
+    </item>
+
     <item android:id="@+id/quitter"
         android:title="Quitter"
         app:showAsAction="never"/>

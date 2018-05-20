@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,7 +24,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements Adapter.OnItemClickListener{
     public static final String EXTRA_URL = "imageUrl";
-    public static final String EXTRA_DESCRIPTION = "countryName";
+    public static final String EXTRA_TITLE = "title";
+    public static final String EXTRA_DESCRIPTION = "description";
+    public static final String EXTRA_DATE = "date";
 
     private RecyclerView mRecyclerView;
     private Adapter mAdapter;
@@ -43,6 +48,26 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
         parseJSON();
     }
 
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.activity_menu,menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()){
+            case R.id.quitter:
+                finish();
+                return(true);
+            case R.id.about:
+                Toast myToast = Toast.makeText(getApplicationContext(),"VALENTAIN et MAGIT", Toast.LENGTH_LONG);
+                myToast.show();
+                return(true);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void parseJSON() {
         String url = "https://newsapi.org/v2/top-headlines?sources=the-sport-bible&apiKey=7fff6f6ddf0e479c87fde6d57b7764b7";
 
@@ -55,9 +80,11 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
                     for(int i = 0; i < jsonArray.length(); i++){
                         JSONObject hit = jsonArray.getJSONObject(i);
 
-                        String country = hit.getString("title");
+                        String title = hit.getString("title");
                         String image = hit.getString ("urlToImage");
-                        mItemList.add(new Item(image, country));
+                        String description = hit.getString ("description");
+                        String date = hit.getString ("publishedAt");
+                        mItemList.add(new Item(image, title, description,date));
                     }
 
                     mAdapter = new Adapter(MainActivity.this, mItemList);
@@ -84,7 +111,9 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
         Item clickedItem = mItemList.get(position);
 
         detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
-        detailIntent.putExtra(EXTRA_DESCRIPTION, clickedItem.getCountry());
+        detailIntent.putExtra(EXTRA_TITLE, clickedItem.getTitle());
+        detailIntent.putExtra(EXTRA_DESCRIPTION, clickedItem.getDescription());
+        detailIntent.putExtra(EXTRA_DATE, "Publised at :" + clickedItem.getDate());
 
         startActivity(detailIntent);
     }
