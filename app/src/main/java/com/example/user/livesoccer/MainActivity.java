@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
     public static final String EXTRA_TITLE = "title";
     public static final String EXTRA_DESCRIPTION = "description";
     public static final String EXTRA_DATE = "date";
+    public static final String EXTRA_PUB_URL = "url";
 
     private RecyclerView mRecyclerView;
     private Adapter mAdapter;
@@ -58,9 +59,13 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
             case R.id.quitter:
                 finish();
                 return(true);
-            case R.id.about:
-                Toast myToast = Toast.makeText(getApplicationContext(),"VALENTAIN et MAGIT", Toast.LENGTH_LONG);
+            case R.id.credits:
+                Toast myToast = Toast.makeText(getApplicationContext(),"Android project made by M.VALENTAIN and M.MAGIT", Toast.LENGTH_LONG);
                 myToast.show();
+                return(true);
+            case R.id.about:
+                Toast myToastAbout = Toast.makeText(getApplicationContext(),"API: The Sport Bible", Toast.LENGTH_LONG);
+                myToastAbout.show();
                 return(true);
 
             default:
@@ -84,7 +89,8 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
                         String image = hit.getString ("urlToImage");
                         String description = hit.getString ("description");
                         String date = hit.getString ("publishedAt");
-                        mItemList.add(new Item(image, title, description,date));
+                        String url = hit.getString ("url");
+                        mItemList.add(new Item(image, title, description,date,url));
                     }
 
                     mAdapter = new Adapter(MainActivity.this, mItemList);
@@ -113,7 +119,8 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
         detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
         detailIntent.putExtra(EXTRA_TITLE, clickedItem.getTitle());
         detailIntent.putExtra(EXTRA_DESCRIPTION, clickedItem.getDescription());
-        detailIntent.putExtra(EXTRA_DATE, "Publised at :" + clickedItem.getDate());
+        detailIntent.putExtra(EXTRA_PUB_URL, clickedItem.getURL());
+        detailIntent.putExtra(EXTRA_DATE, "Publised at: " + clickedItem.getDate());
 
         startActivity(detailIntent);
     }

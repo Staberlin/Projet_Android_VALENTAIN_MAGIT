@@ -5,12 +5,14 @@ public class Item {
     private String mTitle;
     private String mDescription;
     private String mDate;
+    private String mURL;
 
-    public Item(String imageUrl, String title, String description, String date){
+    public Item(String imageUrl, String title, String description, String date, String url){
         mImageUrl = imageUrl;
         mTitle = title;
         mDescription = description;
         mDate = date;
+        mURL = url;
     }
 
     public String getImageUrl() {
@@ -27,5 +29,9 @@ public class Item {
 
     public String getDate() {
         return mDate;
+    }
+
+    public String getURL() {
+        return mURL;
     }
 }

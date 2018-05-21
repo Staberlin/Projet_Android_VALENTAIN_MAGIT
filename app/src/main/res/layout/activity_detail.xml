@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
     app:cardBackgroundColor="#E6E6E6"
+    app:cardCornerRadius="8dp"
     tools:context=".DetailActivity">
 
     <LinearLayout
@@ -25,29 +25,38 @@
             android:id="@+id/text_view_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:paddingBottom="10dp"
             android:layout_gravity="center"
+            android:paddingBottom="10dp"
+            android:text="Description"
             android:textColor="@color/black"
-            android:text="Description"/>
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/text_view_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
             android:layout_gravity="right"
-            android:text="Date"/>
+            android:layout_marginBottom="30dp"
+            android:text="Date" />
 
         <TextView
             android:id="@+id/text_view_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
             android:text="Title Name"
-            android:layout_marginBottom="60dp"
             android:textColor="@color/black"
             android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/link"
+            android:layout_marginBottom="50dp"
+            android:textSize="8dp" />
 
         <Button
             android:id="@+id/back"
@@ -55,10 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="@string/back" />
+
     </LinearLayout>
-
-
-
 
 
 </android.support.v7.widget.CardView>

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/credits"
+        app:showAsAction="never"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="Credits">
+    </item>
+
+    <item
         android:id="@+id/about"
         app:showAsAction="never"
         android:icon="@android:drawable/ic_dialog_info"
@@ -10,7 +17,7 @@
     </item>
 
     <item android:id="@+id/quitter"
-        android:title="Quitter"
+        android:title="Exit"
         app:showAsAction="never"/>
 
 </menu>
