@@ -97,8 +97,9 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected (MenuItem item){
         switch (item.getItemId()){
             case R.id.quitter:
-                finish();
-                return(true);
+                moveTaskToBack(true);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
             case R.id.download:
                 handleActionBiers();
                 return(true);
