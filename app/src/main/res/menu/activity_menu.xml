@@ -3,18 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/download"
+        app:showAsAction="never"
+        android:title="Download Image">
+    </item>
+
+    <item
         android:id="@+id/credits"
         app:showAsAction="never"
-        android:icon="@android:drawable/ic_dialog_info"
         android:title="Credits">
     </item>
 
     <item
         android:id="@+id/about"
         app:showAsAction="never"
-        android:icon="@android:drawable/ic_dialog_info"
         android:title="About">
     </item>
+
 
     <item android:id="@+id/quitter"
         android:title="Exit"

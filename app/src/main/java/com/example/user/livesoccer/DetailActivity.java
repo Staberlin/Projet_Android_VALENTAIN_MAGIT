@@ -1,5 +1,7 @@
 package com.example.user.livesoccer;
 
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +16,15 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 
 import static com.example.user.livesoccer.MainActivity.EXTRA_DATE;
 import static com.example.user.livesoccer.MainActivity.EXTRA_DESCRIPTION;
@@ -71,13 +81,29 @@ public class DetailActivity extends AppCompatActivity {
         return true;
     }
 
+    private void handleActionBiers(){
+        Intent intent = getIntent();
+        String imageUrl = intent.getStringExtra(EXTRA_URL);
+        DownloadManager downloadManager;
+
+        downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+
+        Uri uri = Uri.parse(imageUrl);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        Long reference = downloadManager.enqueue(request);
+    }
+
     public boolean onOptionsItemSelected (MenuItem item){
         switch (item.getItemId()){
             case R.id.quitter:
                 finish();
                 return(true);
+            case R.id.download:
+                handleActionBiers();
+                return(true);
             case R.id.credits:
-                Toast myToast = Toast.makeText(getApplicationContext(),"Android project made by M.VALENTAIN and M.MAGIT", Toast.LENGTH_LONG);
+                Toast myToast = Toast.makeText(getApplicationContext(),"Android project made by Mr.VALENTAIN and Mr.MAGIT", Toast.LENGTH_LONG);
                 myToast.show();
                 return(true);
             case R.id.about:

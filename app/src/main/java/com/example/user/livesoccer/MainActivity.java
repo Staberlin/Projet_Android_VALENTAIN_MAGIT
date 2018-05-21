@@ -1,6 +1,9 @@
 package com.example.user.livesoccer;
 
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +25,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Adapter.OnItemClickListener{
+public class MainActivity extends AppCompatActivity implements Adapter.OnItemClickListener {
     public static final String EXTRA_URL = "imageUrl";
     public static final String EXTRA_TITLE = "title";
     public static final String EXTRA_DESCRIPTION = "description";
@@ -49,24 +52,38 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
         parseJSON();
     }
 
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.activity_menu,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_menu, menu);
         return true;
     }
 
-    public boolean onOptionsItemSelected (MenuItem item){
-        switch (item.getItemId()){
+    private void handleActionBiers() {
+        DownloadManager downloadManager;
+
+        downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse("https://www.esiea.fr/wp-content/uploads/2016/04/Logo-ESIEA.jpg");
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        Long reference = downloadManager.enqueue(request);
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.quitter:
                 finish();
-                return(true);
+                return (true);
+            case R.id.download:
+                handleActionBiers();
+                return (true);
             case R.id.credits:
-                Toast myToast = Toast.makeText(getApplicationContext(),"Android project made by M.VALENTAIN and M.MAGIT", Toast.LENGTH_LONG);
+                Toast myToast = Toast.makeText(getApplicationContext(), "Android project made by Mr.VALENTAIN and Mr.MAGIT", Toast.LENGTH_LONG);
                 myToast.show();
-                return(true);
+                return (true);
             case R.id.about:
-                Toast myToastAbout = Toast.makeText(getApplicationContext(),"API: The Sport Bible", Toast.LENGTH_LONG);
+                Toast myToastAbout = Toast.makeText(getApplicationContext(), "API: The Sport Bible", Toast.LENGTH_LONG);
                 myToastAbout.show();
-                return(true);
+                return (true);
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -82,15 +99,15 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
                 try {
                     JSONArray jsonArray = response.getJSONArray("articles");
 
-                    for(int i = 0; i < jsonArray.length(); i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject hit = jsonArray.getJSONObject(i);
 
                         String title = hit.getString("title");
-                        String image = hit.getString ("urlToImage");
-                        String description = hit.getString ("description");
-                        String date = hit.getString ("publishedAt");
-                        String url = hit.getString ("url");
-                        mItemList.add(new Item(image, title, description,date,url));
+                        String image = hit.getString("urlToImage");
+                        String description = hit.getString("description");
+                        String date = hit.getString("publishedAt");
+                        String url = hit.getString("url");
+                        mItemList.add(new Item(image, title, description, date, url));
                     }
 
                     mAdapter = new Adapter(MainActivity.this, mItemList);
@@ -124,4 +141,5 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
 
         startActivity(detailIntent);
     }
+
 }
