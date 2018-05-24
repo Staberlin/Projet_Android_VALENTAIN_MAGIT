@@ -2,11 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <item
         android:id="@+id/download"
         app:showAsAction="never"
-        android:title="Download Image">
+        android:title="Download Image">Download
     </item>
+
 
     <item
         android:id="@+id/credits"
@@ -23,6 +25,7 @@
 
     <item android:id="@+id/quitter"
         android:title="Exit"
-        app:showAsAction="never"/>
+        app:showAsAction="never">
+    </item>
 
 </menu>

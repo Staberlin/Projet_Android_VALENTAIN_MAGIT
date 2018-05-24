@@ -1,8 +1,12 @@
 package com.example.user.livesoccer;
 
+import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
     private Adapter mAdapter;
     private ArrayList<Item> mItemList;
     private RequestQueue mRequestQueue;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
         detailIntent.putExtra(EXTRA_TITLE, clickedItem.getTitle());
         detailIntent.putExtra(EXTRA_DESCRIPTION, clickedItem.getDescription());
         detailIntent.putExtra(EXTRA_PUB_URL, clickedItem.getURL());
-        detailIntent.putExtra(EXTRA_DATE, "Publised at: " + clickedItem.getDate());
+        detailIntent.putExtra(EXTRA_DATE, "Published at: " + clickedItem.getDate());
 
         startActivity(detailIntent);
     }
