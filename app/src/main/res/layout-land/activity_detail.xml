@@ -55,6 +55,7 @@
             android:layout_height="wrap_content"
             android:text="@string/link"
             android:textSize="8dp"
+            android:background="@drawable/my_button_bg"
             android:layout_gravity="center"/>
 
         <Button
